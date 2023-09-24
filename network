@@ -37,16 +37,6 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
             printf("Source Port: %d\n", ntohs(tcp->th_sport));
             printf("Destination Port: %d\n", ntohs(tcp->th_dport));
         }
-
-        // Extract and print message (you may need to adjust the length)
-        int message_len = header->len - (14 + (ip->ip_hl << 2)); // Ethernet and IP header lengths
-        if (message_len > 0) {
-            printf("Message: ");
-            for (int i = 0; i < message_len && i < 32; i++) {
-                printf("%02x ", packet[14 + (ip->ip_hl << 2) + i]); // Skip Ethernet and IP headers
-            }
-            printf("\n");
-        }
     }
 }
 
